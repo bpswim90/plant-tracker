@@ -5,6 +5,7 @@ import com.williampaulsen.planttracker.models.PlantType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value="plant/type")
@@ -20,4 +21,15 @@ public class PlantTypeController {
 
         return "plantType/index";
     }
+
+    @RequestMapping(value="/add", method= RequestMethod.GET)
+    public String addPlantType(Model model) {
+        model.addAttribute("title", "Add New Plant Type");
+        model.addAttribute("plantType", new PlantType());
+        model.addAttribute("lightPreferences",LightPreference.values());
+
+        return "plantType/add";
+    }
+
+    //TODO: Add controller to process add form and redirect to the new plant type profile
 }

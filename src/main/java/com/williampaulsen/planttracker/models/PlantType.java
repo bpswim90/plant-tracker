@@ -3,6 +3,10 @@ package com.williampaulsen.planttracker.models;
 
 //This class encapsulates the general care profile for a type of plant, e.g. a jade plant, or an aloe.
 
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class PlantType {
 
     private String name;

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">Title</title>
+</head>
+<body>
+
+<form method="post" th:object="${plantType}">
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="daysBetweenWater">Days between water</label>
+        <input class="form-control" th:field="*{daysBetweenWater}" />
+        <span th:errors="*{daysBetweenWater}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="lightPreference">Light Preference</label>
+        <select th:field="*{lightPreference}">
+            <option th:each="lightPreference : ${lightPreferences}"
+                    th:text="${lightPreference.name}"
+                    th:value="${lightPreference}"></option>
+        </select>
+    </div>
+
+    <input type="submit" value="Add Plant Type" />
+</form>
+
+</body>
+</html>
