@@ -5,6 +5,7 @@ import com.williampaulsen.planttracker.models.PlantType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -39,6 +40,22 @@ public class PlantTypeController {
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public String addPlantType(Model model, @ModelAttribute PlantType newPlantType) {
         plantTypes.add(newPlantType);
+
+        return "redirect:";
+    }
+
+    //View for individual plant types.
+    @RequestMapping(value="/{plantType_id}")
+    public String viewPlantType(Model model, @PathVariable int plantType_id) {
+
+        for (PlantType plantType : plantTypes) {
+            if (plantType.getId() == plantType_id) {
+                PlantType thisPlantType = plantType;
+                model.addAttribute("plantType",thisPlantType);
+
+                return "plantType/view";
+            }
+        }
 
         return "redirect:";
     }

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">Title</title>
+</head>
+<h1 th:text="${plantType.name}"></h1>
+<p>This plant likes to be watered every <span th:text="${plantType.daysBetweenWater}"></span> days.</p>
+<body>
+
+</body>
+</html>
