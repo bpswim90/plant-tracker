@@ -8,6 +8,6 @@
 <h1 th:text="${plantType.name}"></h1>
 <p>This plant likes to be watered at least once every <span th:text="${plantType.daysBetweenWater}"></span> days.</p>
 <p>This plant type's ID is <span th:text="${plantType.id}"></span>.</p>
-
+<p>This plant prefers: <span th:text="${plantType.lightPreference.name}"></span></p>
 </body>
 </html>
