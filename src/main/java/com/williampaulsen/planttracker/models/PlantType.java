@@ -1,31 +1,34 @@
 package com.williampaulsen.planttracker.models;
 
-
-//This class encapsulates the general care profile for a type of plant, e.g. a jade plant, or an aloe.
-
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+//This class encapsulates the general care profile for a type of plant, e.g. a jade plant, or an aloe.
+
+@Entity
 public class PlantType {
 
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @NotNull
+    @Size(min=3,max=20)
     private String name;
 
+    @NotNull
     private int daysBetweenWater;
 
+    @NotNull
     private LightPreference lightPreference;
 
-    private final int id;
-
-    private static int nextId = 1;
-
     public PlantType () {
-        this.id = nextId;
-        nextId++;
     }
 
     public PlantType(String name, int daysBetweenWater) {
-        this();
         this.name = name;
         this.daysBetweenWater = daysBetweenWater;
     }
