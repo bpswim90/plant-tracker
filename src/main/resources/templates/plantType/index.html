@@ -4,10 +4,11 @@
     <meta charset="UTF-8"/>
     <title th:text="${title}">Title</title>
 </head>
-<body>
-<h1 th:text="${plantType.name}"></h1>
-<p>This plant likes to be watered at least once every <span th:text="${plantType.daysBetweenWater}"></span> days.</p>
-<p>This plant type's ID is <span th:text="${plantType.id}"></span>.</p>
-<p>This plant prefers: <span th:text="${plantType.lightPreference.name}"></span></p>
-</body>
+<table>
+    <tr th:each="plantType : ${plantTypes}">
+        <td th:text="${plantType.name}"></td>
+        <td th:text="${plantType.daysBetweenWater}"></td>
+        <td th:text="${plantType.lightPreference.name}"></td>
+    </tr>
+</table>
 </html>
