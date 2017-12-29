@@ -48,7 +48,9 @@ public class PlantTypeController {
                                Errors errors) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("title", "Add New Plant Type");
             model.addAttribute("plantType", newPlantType);
+            model.addAttribute("lightPreferences",LightPreference.values());
             return "plantType/add";
         }
 
@@ -62,6 +64,7 @@ public class PlantTypeController {
     public String viewPlantType(Model model, @PathVariable int plantType_id) {
 
         PlantType thisPlantType = plantTypeDao.findOne(plantType_id);
+        model.addAttribute("title","Profile for: " + thisPlantType.getName());
         model.addAttribute("plantType", thisPlantType);
 
         return "plantType/view";
