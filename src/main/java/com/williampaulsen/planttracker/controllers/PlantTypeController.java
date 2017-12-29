@@ -69,4 +69,14 @@ public class PlantTypeController {
 
         return "plantType/view";
     }
+
+    //Display remove plant type form.
+    @RequestMapping(value="/remove", method=RequestMethod.GET)
+    public String removePlantType(Model model) {
+
+        model.addAttribute("title","Remove Plant Type");
+        model.addAttribute("plantTypes",plantTypeDao.findAll());
+
+        return "plantType/remove";
+    }
 }
