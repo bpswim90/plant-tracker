@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -26,7 +23,7 @@ public class PlantTypeController {
     public String index(Model model) {
 
         model.addAttribute("plantTypes",plantTypeDao.findAll());
-        model.addAttribute("title","Plants");
+        model.addAttribute("title","All Plant Types");
 
         return "plantType/index";
     }
@@ -78,5 +75,16 @@ public class PlantTypeController {
         model.addAttribute("plantTypes",plantTypeDao.findAll());
 
         return "plantType/remove";
+    }
+
+    //Process remove plant type form.
+    @RequestMapping(value="/remove", method=RequestMethod.POST)
+    public String processRemovePlantType(@RequestParam int[] plantTypeIds) {
+
+        for (int plantTypeId : plantTypeIds) {
+            plantTypeDao.delete(plantTypeId);
+        }
+
+        return "redirect:";
     }
 }
