@@ -2,9 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
+<body class="container">
+
+<nav th:replace="fragments :: navbar"></nav>
+
 <h1 th:text="${plantType.name}"></h1>
 <p>This plant likes to be watered every <span th:text="${plantType.daysBetweenWater}"></span> days.</p>
-<body>
 
 </body>
 </html>

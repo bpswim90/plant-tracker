@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+<body class="container">
 
-<table>
+<nav th:replace="fragments :: navbar"></nav>
+<h1 th:text="${title}">All Plant Types</h1>
+<table class="table">
+    <thead>
+        <th>Plant Type Name</th>
+        <th>Days between watering</th>
+        <th>Light Preference</th>
+        <th>ID</th>
+    </thead>
     <tr th:each="plantType : ${plantTypes}">
         <td th:text="${plantType.name}"></td>
         <td th:text="${plantType.daysBetweenWater}"></td>
@@ -10,4 +19,6 @@
         <td th:text="${plantType.id}"></td>
     </tr>
 </table>
+
+</body>
 </html>
