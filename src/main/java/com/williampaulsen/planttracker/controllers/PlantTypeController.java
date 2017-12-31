@@ -87,4 +87,16 @@ public class PlantTypeController {
 
         return "redirect:";
     }
+
+    //Display edit plant type form.
+    @RequestMapping(value="/edit/{plantType_id}", method=RequestMethod.GET)
+    public String editPlantType(Model model, @PathVariable int plantType_id) {
+        PlantType thisPlantType = plantTypeDao.findOne(plantType_id);
+
+        model.addAttribute("title", "Edit Plant Type: " + thisPlantType.getName());
+        model.addAttribute("plantType",thisPlantType);
+        model.addAttribute("lightPreferences",LightPreference.values());
+
+        return "plantType/edit";
+    }
 }
