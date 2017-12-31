@@ -96,7 +96,33 @@ public class PlantTypeController {
         model.addAttribute("title", "Edit Plant Type: " + thisPlantType.getName());
         model.addAttribute("plantType",thisPlantType);
         model.addAttribute("lightPreferences",LightPreference.values());
+        model.addAttribute("plantTypeId",plantType_id);
 
         return "plantType/edit";
+    }
+
+    //Process edit plant type form.
+    @RequestMapping(value="/edit", method=RequestMethod.POST)
+    public String processEditPlantType(Model model,
+                                       @RequestParam int plantTypeId,
+                                       @ModelAttribute @Valid PlantType formPlantType,
+                                       Errors errors) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Plant Type: " + formPlantType.getName());
+            model.addAttribute("plantType",formPlantType);
+            model.addAttribute("lightPreferences",LightPreference.values());
+            model.addAttribute("plantTypeId",plantTypeId);
+
+            return "plantType/edit";
+        }
+
+        PlantType thisPlantType = plantTypeDao.findOne(plantTypeId);
+
+        thisPlantType.setName(formPlantType.getName());
+        thisPlantType.setDaysBetweenWater(formPlantType.getDaysBetweenWater());
+        thisPlantType.setLightPreference(formPlantType.getLightPreference());
+        plantTypeDao.save(thisPlantType);
+
+        return "redirect:";
     }
 }
