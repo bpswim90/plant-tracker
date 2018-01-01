@@ -14,7 +14,7 @@
         <th></th>
     </thead>
     <tr th:each="plantType : ${plantTypes}">
-        <td th:text="${plantType.name}"></td>
+        <td><a th:href="@{'/plant/type/' + ${plantType.id}}" th:text="${plantType.name}"></a></td>
         <td th:text="${plantType.daysBetweenWater}"></td>
         <td th:text="${plantType.lightPreference.name}"></td>
         <td th:text="${plantType.id}"></td>

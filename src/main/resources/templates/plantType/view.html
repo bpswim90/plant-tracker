@@ -6,8 +6,12 @@
 
 <nav th:replace="fragments :: navbar"></nav>
 
-<h1 th:text="${plantType.name}"></h1>
-<p>This plant likes to be watered every <span th:text="${plantType.daysBetweenWater}"></span> days.</p>
+<div class="container" style="max-width: 600px;">
+    <h1 th:text="${plantType.name}"></h1>
+    <p><strong>Water preference:</strong> Every <span th:text="${plantType.daysBetweenWater}"></span> days.</p>
+    <p><strong>Light preference:</strong> <span th:text="${plantType.lightPreference.name}"></span>.</p>
+    <a th:href="@{'/plant/type/edit/' + ${plantType.id}}" class="btn btn-default" role="button">Edit Plant Type</a>
+</div>
 
 </body>
 </html>
