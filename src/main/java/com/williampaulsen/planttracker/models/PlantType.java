@@ -1,12 +1,12 @@
 package com.williampaulsen.planttracker.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 //This class encapsulates the general care profile for a type of plant, e.g. a jade plant, or an aloe.
 
@@ -28,6 +28,10 @@ public class PlantType {
 
     @NotNull
     private LightPreference lightPreference;
+
+    @OneToMany
+    @JoinColumn(name = "plant_type_id")
+    private List<Plant> plants = new ArrayList<>();
 
     public PlantType () {
     }
