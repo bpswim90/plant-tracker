@@ -9,13 +9,13 @@
 <h1 th:text="${title}">All Plants</h1>
 
 <p>Please select the plant type, or create a new plant type.</p>
-<form>
+<form method="POST">
     <div class="form-group">
-        <label for="plantType">Select Type:</label>
-        <select class="form-control" id="plantType">
+        <label for="plantTypeId">Select Type:</label>
+        <select class="form-control" name="plantTypeId" id="plantTypeId">
             <option th:each="plantType : ${plantTypes}"
                     th:text="${plantType.name}"
-                    th:value="${plantType}"></option>
+                    th:value="${plantType.id}"></option>
         </select>
     </div>
     <input type="submit" value="Continue" class="btn btn-default"/>
