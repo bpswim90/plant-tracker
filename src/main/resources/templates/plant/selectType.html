@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<nav th:replace="fragments :: navbar"></nav>
+
+<div class="container" style="max-width:600px">
+<h1 th:text="${title}">All Plants</h1>
+
+<p>Please select the plant type, or create a new plant type.</p>
+<form>
+    <div class="form-group">
+        <label for="plantType">Select Type:</label>
+        <select class="form-control" id="plantType">
+            <option th:each="plantType : ${plantTypes}"
+                    th:text="${plantType.name}"
+                    th:value="${plantType}"></option>
+        </select>
+    </div>
+    <input type="submit" value="Continue" class="btn btn-default"/>
+</form>
+    <h4>- or -</h4>
+    <a th:href="@{/plant/type/add/}" class="btn btn-default" role="button">New Type</a>
+</div>
+
+
+</body>
+</html>
