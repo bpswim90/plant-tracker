@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value="plant")
@@ -31,7 +33,7 @@ public class PlantController {
     }
 
     //This view will ask the user to select the desired plant type or create a new type.
-    @RequestMapping(value="add")
+    @RequestMapping(value="add", method=RequestMethod.GET)
     public String selectType(Model model) {
 
         model.addAttribute("title","Add New Plant");
@@ -40,5 +42,22 @@ public class PlantController {
         return "plant/selectType";
     }
 
-    //TODO: Write a controller to display an add form for a new plant. 
+    //Displays add plant form, with values of selected plant type filled in automatically.
+    @RequestMapping(value="add", method=RequestMethod.POST)
+    public String displayAddPlantForm(Model model, @RequestParam int plantTypeId) {
+
+        //Below is just temporary code.
+        //TODO: Have this controller pass in a new plant object to render an Add Plant form,
+        //TODO: and auto-fill relevant fields with those from its plantType.
+
+        PlantType thisPlantType = plantTypeDao.findOne(plantTypeId);
+
+        model.addAttribute("title","Add New Plant");
+        model.addAttribute("plant",new Plant());
+        //model.addAttribute("plantType",thisPlantType);
+        model.addAttribute("plantTypes", plantTypeDao.findAll());
+        model.addAttribute("lightPreferences",LightPreference.values());
+
+        return "plant/add";
+    }
 }
