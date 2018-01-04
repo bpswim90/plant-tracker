@@ -40,6 +40,11 @@ public class Plant {
 
     }
 
+    public Plant(String name, int daysBetweenWater) {
+        this.name = name;
+        this.daysBetweenWater = daysBetweenWater;
+    }
+
     public Plant(PlantType plantType, String name) {
         this.name = name;
         this.daysBetweenWater = plantType.getDaysBetweenWater();
@@ -65,5 +70,33 @@ public class Plant {
 
     public void water() {
         this.lastWatered = LocalDate.now();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getDaysBetweenWater() {
+        return daysBetweenWater;
+    }
+
+    public void setDaysBetweenWater(int daysBetweenWater) {
+        this.daysBetweenWater = daysBetweenWater;
+    }
+
+    public LightPreference getLightPreference() {
+        return lightPreference;
+    }
+
+    public void setLightPreference(LightPreference lightPreference) {
+        this.lightPreference = lightPreference;
+    }
+
+    public int getId() {
+        return id;
     }
 }
