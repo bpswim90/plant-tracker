@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<nav th:replace="fragments :: navbar"></nav>
+
+<div class="container" style="max-width: 600px;">
+    <h1 th:text="${plant.name}"></h1>
+    <p><strong>Plant Type:</strong> <span th:text="${plant.plantType.name}"></span></p>
+    <p><strong>Water preference:</strong> Every <span th:text="${plant.daysBetweenWater}"></span> days.</p>
+    <p><strong>Last watered: </strong>
+        <span th:unless="${plant.lastWatered}">Never.</span>
+        <span th:if="${plant.lastWatered}" th:text="${plant.lastWatered}"></span>
+    </p>
+    <p><strong>Light preference:</strong> <span th:text="${plant.lightPreference.name}"></span>.</p>
+    <a th:href="@{'/plant/edit/' + ${plant.id}}" class="btn btn-default" role="button">Edit Plant</a>
+</div>
+
+</body>
+</html>

@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -63,6 +60,7 @@ public class PlantController {
         return "plant/add";
     }
 
+    //Validates form data and saves the plant to the database if there are no errors.
     @RequestMapping(value="add/validate", method=RequestMethod.POST)
     public String processAddPlantForm(Model model,
                                       @ModelAttribute @Valid Plant newPlant,
@@ -79,5 +77,16 @@ public class PlantController {
         plantDao.save(newPlant);
 
         return "redirect:/plant";
+    }
+
+    //View for individual plant.
+    @RequestMapping(value="/{plant_id}")
+    public String viewPlantType(Model model, @PathVariable int plant_id) {
+
+        Plant thisPlant = plantDao.findOne(plant_id);
+        model.addAttribute("title","Profile for: " + thisPlant.getName());
+        model.addAttribute("plant", thisPlant);
+
+        return "plant/view";
     }
 }

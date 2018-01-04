@@ -28,7 +28,14 @@
         </div>
         <ul class="nav navbar-nav">
 
-            <!--TODO: Add "My Plants" link to nav-->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Plants
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a th:href="@{/plant}">View All</a></li>
+                    <li><a th:href="@{/plant/add}">Add New</a></li>
+                </ul>
+            </li>
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Plant Types

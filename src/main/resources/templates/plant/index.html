@@ -15,7 +15,10 @@
     <th></th>
     </thead>
     <tr th:each="plant : ${plants}">
-        <td><span th:text="${plant.name}"></span> (<span th:text="${plant.plantType.name}"></span>)</td>
+        <td>
+            <a th:href="@{'/plant/' + ${plant.id}}" th:text="${plant.name}"></a>
+             (<span th:text="${plant.plantType.name}"></span>)
+        </td>
         <td th:text="${plant.daysBetweenWater}"></td>
         <td th:unless="${plant.lastWatered}">Never</td>
         <td th:if="${plant.lastWatered}" th:text="${plant.lastWatered}"></td>
