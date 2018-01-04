@@ -53,14 +53,14 @@ public class PlantTypeController {
 
         plantTypeDao.save(newPlantType);
 
-        return "redirect:";
+        return "redirect:/plant/type/" + newPlantType.getId();
     }
 
     //View for individual plant types.
-    @RequestMapping(value="/{plantType_id}")
-    public String viewPlantType(Model model, @PathVariable int plantType_id) {
+    @RequestMapping(value="/{plant_type_id}")
+    public String viewPlantType(Model model, @PathVariable int plant_type_id) {
 
-        PlantType thisPlantType = plantTypeDao.findOne(plantType_id);
+        PlantType thisPlantType = plantTypeDao.findOne(plant_type_id);
         model.addAttribute("title","Profile for: " + thisPlantType.getName());
         model.addAttribute("plantType", thisPlantType);
 
