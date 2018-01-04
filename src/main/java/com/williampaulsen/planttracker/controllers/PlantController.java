@@ -8,9 +8,13 @@ import com.williampaulsen.planttracker.models.data.PlantTypeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value="plant")
@@ -46,9 +50,7 @@ public class PlantController {
     @RequestMapping(value="add", method=RequestMethod.POST)
     public String displayAddPlantForm(Model model, @RequestParam int plantTypeId) {
 
-        //Below is just temporary code.
-        //TODO: Have this controller pass in a new plant object to render an Add Plant form,
-        //TODO: and auto-fill relevant fields with those from its plantType.
+        //TODO: auto-fill relevant fields with those from its plantType.
 
         PlantType thisPlantType = plantTypeDao.findOne(plantTypeId);
 
@@ -59,5 +61,23 @@ public class PlantController {
         model.addAttribute("lightPreferences",LightPreference.values());
 
         return "plant/add";
+    }
+
+    @RequestMapping(value="add/validate", method=RequestMethod.POST)
+    public String processAddPlantForm(Model model,
+                                      @ModelAttribute @Valid Plant newPlant,
+                                      Errors errors) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title","Add New Plant");
+            model.addAttribute("plant",newPlant);
+            model.addAttribute("plantTypes", plantTypeDao.findAll());
+            model.addAttribute("lightPreferences",LightPreference.values());
+
+            return "plant/add";
+        }
+
+        plantDao.save(newPlant);
+
+        return "redirect:/plant";
     }
 }
