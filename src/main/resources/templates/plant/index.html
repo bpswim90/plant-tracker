@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<nav th:replace="fragments :: navbar"></nav>
+<h1 th:text="${title}">All Plants</h1>
+<table class="table">
+    <thead>
+    <th>Plant Name</th>
+    <th>Days between watering</th>
+    <th>Last Watered</th>
+    <th>Light Preference</th>
+    <th>ID</th>
+    <th></th>
+    </thead>
+    <tr th:each="plant : ${plants}">
+        <td><span th:text="${plant.name}"></span> (<span th:text="${plant.plantType.name}"></span>)</td>
+        <td th:text="${plant.daysBetweenWater}"></td>
+        <td th:unless="${plant.lastWatered}">Never</td>
+        <td th:if="${plant.lastWatered}" th:text="${plant.lastWatered}"></td>
+        <td th:text="${plant.lightPreference.name}"></td>
+        <td th:text="${plant.id}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
