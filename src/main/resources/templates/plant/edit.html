@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<nav th:replace="fragments :: navbar"></nav>
+
+<form th:action="@{/plant/add/validate}" method="post" class="container" style="max-width:600px;" th:object="${plant}">
+    <h1 th:text="${title}"></h1>
+    <div class="form-group">
+        <label th:for="type">Type</label>
+        <select th:field="*{plantType}">
+            <option th:each="plantType : ${plantTypes}"
+                    th:text="${plantType.name}"
+                    th:value="${plantType.id}"></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="daysBetweenWater">Days between water</label>
+        <input class="form-control" th:field="*{daysBetweenWater}" />
+        <span th:errors="*{daysBetweenWater}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="lightPreference">Light Preference</label>
+        <select th:field="*{lightPreference}">
+            <option th:each="lightPreference : ${lightPreferences}"
+                    th:text="${lightPreference.name}"
+                    th:value="${lightPreference}"></option>
+        </select>
+    </div>
+
+    <input type="hidden" th:value="${plantId}" name="plantId" />
+
+    <input type="submit" value="Submit Changes" class="btn btn-default"/>
+</form>
+
+</body>
+</html>

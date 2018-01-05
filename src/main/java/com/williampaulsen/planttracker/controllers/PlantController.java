@@ -81,7 +81,7 @@ public class PlantController {
 
     //View for individual plant.
     @RequestMapping(value="/{plant_id}")
-    public String viewPlantType(Model model, @PathVariable int plant_id) {
+    public String viewPlant(Model model, @PathVariable int plant_id) {
 
         Plant thisPlant = plantDao.findOne(plant_id);
         model.addAttribute("title","Profile for: " + thisPlant.getName());
@@ -89,4 +89,24 @@ public class PlantController {
 
         return "plant/view";
     }
+
+    //Displays edit plant form.
+    @RequestMapping(value="/edit/{plant_id}")
+    public String editPlant(Model model, @PathVariable int plant_id) {
+        Plant thisPlant = plantDao.findOne(plant_id);
+
+        model.addAttribute("title","Edit Plant: " + thisPlant.getName());
+        model.addAttribute("plant",thisPlant);
+        model.addAttribute("plantTypes", plantTypeDao.findAll());
+        model.addAttribute("lightPreferences", LightPreference.values());
+        model.addAttribute("plantId",plant_id);
+
+        return "plant/edit";
+    }
+
+    //Process edit plant form and save changes to database.
+
+    //TODO: Make remove plant controller.
+
+    //TODO: Make water plant controller.
 }
