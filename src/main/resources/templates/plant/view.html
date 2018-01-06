@@ -16,6 +16,7 @@
     </p>
     <p><strong>Light preference:</strong> <span th:text="${plant.lightPreference.name}"></span>.</p>
     <a th:href="@{'/plant/edit/' + ${plant.id}}" class="btn btn-default" role="button">Edit Plant</a>
+    <a th:href="@{'/plant/water/' + ${plant.id}}" class="btn btn-info" role="button">Water Plant</a>
 </div>
 
 </body>

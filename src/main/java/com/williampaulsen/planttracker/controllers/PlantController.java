@@ -152,5 +152,13 @@ public class PlantController {
         return "redirect:";
     }
 
-    //TODO: Make water plant controller.
+    //Waters an individual plant and saves the change to the database.
+    @RequestMapping(value="/water/{plant_id}")
+    public String waterPlant(@PathVariable int plant_id) {
+        Plant thisPlant = plantDao.findOne(plant_id);
+        thisPlant.water();
+        plantDao.save(thisPlant);
+
+        return "redirect:/plant";
+    }
 }
