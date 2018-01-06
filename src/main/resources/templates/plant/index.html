@@ -24,6 +24,7 @@
         <td th:if="${plant.lastWatered}" th:text="${plant.lastWatered}"></td>
         <td th:text="${plant.lightPreference.name}"></td>
         <td th:text="${plant.id}"></td>
+        <td><a th:href="@{'/plant/edit/' + ${plant.id}}" class="btn btn-default btn-xs" role="button">Edit</a></td>
     </tr>
 </table>
 
