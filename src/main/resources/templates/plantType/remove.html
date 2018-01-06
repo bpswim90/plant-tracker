@@ -8,12 +8,12 @@
 
 <form method="post" class="container" style="max-width:600px;">
     <h1 th:text="${title}"></h1>
-
+    <p>Please select the plant types you would like to remove:</p>
     <div th:each="plantType : ${plantTypes}" class="checkbox">
         <label><input type="checkbox" name="plantTypeIds" th:value="${plantType.id}" th:text="${plantType.name}"/></label>
     </div>
 
-    <input type="submit" value="Remove Plant Type" class="btn btn-default"/>
+    <input type="submit" value="Remove" class="btn btn-default"/>
 </form>
 
 </body>
