@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<nav th:replace="fragments :: navbar"></nav>
+
+<form method="post" class="container" style="max-width:600px;">
+    <h1 th:text="${title}"></h1>
+    <p>Please select the plants you would like to remove:</p>
+    <div th:each="plant : ${plants}" class="checkbox">
+        <label><input type="checkbox" name="plantIds" th:value="${plant.id}" th:text="${plant.name}"/></label>
+    </div>
+
+    <input type="submit" value="Remove" class="btn btn-default"/>
+</form>
+
+</body>
+</html>

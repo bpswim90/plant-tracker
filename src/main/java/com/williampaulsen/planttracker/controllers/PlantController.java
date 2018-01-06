@@ -131,7 +131,26 @@ public class PlantController {
         return "redirect:";
     }
 
-    //TODO: Make remove plant controller.
+    //Display remove plant form.
+    @RequestMapping(value="/remove", method=RequestMethod.GET)
+    public String removePlant(Model model) {
+
+        model.addAttribute("title","Remove Plant");
+        model.addAttribute("plants",plantDao.findAll());
+
+        return "plant/remove";
+    }
+
+    //Process remove plant form.
+    @RequestMapping(value="/remove", method=RequestMethod.POST)
+    public String processRemovePlant(@RequestParam int[] plantIds) {
+
+        for (int plantId : plantIds) {
+            plantDao.delete(plantId);
+        }
+
+        return "redirect:";
+    }
 
     //TODO: Make water plant controller.
 }
