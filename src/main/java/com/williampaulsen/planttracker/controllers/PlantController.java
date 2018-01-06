@@ -91,7 +91,7 @@ public class PlantController {
     }
 
     //Displays edit plant form.
-    @RequestMapping(value="/edit/{plant_id}")
+    @RequestMapping(value="/edit/{plant_id}", method=RequestMethod.GET)
     public String editPlant(Model model, @PathVariable int plant_id) {
         Plant thisPlant = plantDao.findOne(plant_id);
 
@@ -105,6 +105,31 @@ public class PlantController {
     }
 
     //Process edit plant form and save changes to database.
+    @RequestMapping(value="/edit", method=RequestMethod.POST)
+    public String processEditPlan(Model model,
+                                  @RequestParam int plantId,
+                                  @ModelAttribute @Valid Plant formPlant,
+                                  Errors errors) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title","Edit Plant: " + formPlant.getName());
+            model.addAttribute("plant",formPlant);
+            model.addAttribute("plantTypes", plantTypeDao.findAll());
+            model.addAttribute("lightPreferences", LightPreference.values());
+            model.addAttribute("plantId",plantId);
+
+            return "plant/edit";
+        }
+
+        Plant thisPlant = plantDao.findOne(plantId);
+
+        thisPlant.setName(formPlant.getName());
+        thisPlant.setDaysBetweenWater(formPlant.getDaysBetweenWater());
+        thisPlant.setLightPreference(formPlant.getLightPreference());
+        thisPlant.setPlantType(formPlant.getPlantType());
+        plantDao.save(thisPlant);
+
+        return "redirect:";
+    }
 
     //TODO: Make remove plant controller.
 
