@@ -47,13 +47,16 @@ public class PlantController {
     @RequestMapping(value="add", method=RequestMethod.POST)
     public String displayAddPlantForm(Model model, @RequestParam int plantTypeId) {
 
-        //TODO: auto-fill relevant fields with those from its plantType.
-
         PlantType thisPlantType = plantTypeDao.findOne(plantTypeId);
+        Plant formPlant = new Plant();
+
+        //Assigns the selected plantType's properties to the formPlant to be rendered in the add form.
+        formPlant.setPlantType(thisPlantType);
+        formPlant.setDaysBetweenWater(thisPlantType.getDaysBetweenWater());
+        formPlant.setLightPreference(thisPlantType.getLightPreference());
 
         model.addAttribute("title","Add New Plant");
-        model.addAttribute("plant",new Plant());
-        //model.addAttribute("plantType",thisPlantType);
+        model.addAttribute("plant",formPlant);
         model.addAttribute("plantTypes", plantTypeDao.findAll());
         model.addAttribute("lightPreferences",LightPreference.values());
 
@@ -161,4 +164,6 @@ public class PlantController {
 
         return "redirect:/plant";
     }
+
+    //TODO: Write controller for quick-water page (water multiple plants at once via checkboxes).
 }
