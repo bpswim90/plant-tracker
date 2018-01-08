@@ -165,5 +165,13 @@ public class PlantController {
         return "redirect:/plant";
     }
 
-    //TODO: Write controller for quick-water page (water multiple plants at once via checkboxes).
+    //Display quick-water page (water multiple plants).
+    @RequestMapping(value="/water", method=RequestMethod.GET)
+    public String displayQuickWater(Model model) {
+
+        model.addAttribute("title","Water Plants");
+        model.addAttribute("plants",plantDao.findAll());
+
+        return "plant/water";
+    }
 }
