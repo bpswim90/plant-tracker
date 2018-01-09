@@ -37,7 +37,7 @@ public class Plant {
     private PlantType plantType;
 
     @Transient
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM uuuu");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM uuuu");
 
     public Plant() {
 
