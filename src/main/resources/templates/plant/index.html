@@ -10,6 +10,7 @@
     <th>Plant Name</th>
     <th>Days between watering</th>
     <th>Last Watered</th>
+    <th>Needs Water On</th>
     <th>Light Preference</th>
     <th>ID</th>
     <th></th>
@@ -22,6 +23,8 @@
         <td th:text="${plant.daysBetweenWater}"></td>
         <td th:unless="${plant.lastWatered}">Never</td>
         <td th:if="${plant.lastWatered}" th:text="${plant.lastWatered}"></td>
+        <td th:unless="${plant.nextWater}">N/a</td>
+        <td th:if="${plant.nextWater}" th:text="${plant.nextWater}"></td>
         <td th:text="${plant.lightPreference.name}"></td>
         <td th:text="${plant.id}"></td>
         <td>

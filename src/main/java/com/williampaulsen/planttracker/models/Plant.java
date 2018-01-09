@@ -1,14 +1,12 @@
 package com.williampaulsen.planttracker.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 //This class encapsulates the specific care profile for an individual plant.
 
@@ -31,10 +29,15 @@ public class Plant {
     @NotNull
     private LightPreference lightPreference;
 
-    private LocalDate lastWatered;
+    private String lastWatered;
+
+    private String nextWater;
 
     @ManyToOne
     private PlantType plantType;
+
+    @Transient
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM uuuu");
 
     public Plant() {
 
@@ -52,11 +55,11 @@ public class Plant {
         this.plantType = plantType;
     }
 
-    public LocalDate getLastWatered() {
+    public String getLastWatered() {
         return lastWatered;
     }
 
-    public void setLastWatered(LocalDate lastWatered) {
+    public void setLastWatered(String lastWatered) {
         this.lastWatered = lastWatered;
     }
 
@@ -69,7 +72,12 @@ public class Plant {
     }
 
     public void water() {
-        this.lastWatered = LocalDate.now();
+        LocalDate date = LocalDate.now();
+        LocalDate nextWaterDate = date.plusDays(daysBetweenWater);
+        String lastWatered = date.format(formatter);
+        String nextWater = nextWaterDate.format(formatter);
+        this.lastWatered = lastWatered;
+        this.nextWater = nextWater;
     }
 
     public String getName() {
@@ -98,5 +106,13 @@ public class Plant {
 
     public int getId() {
         return id;
+    }
+
+    public String getNextWater() {
+        return nextWater;
+    }
+
+    public void setNextWater(String nextWater) {
+        this.nextWater = nextWater;
     }
 }
