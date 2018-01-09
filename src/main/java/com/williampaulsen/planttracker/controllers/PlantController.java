@@ -174,4 +174,17 @@ public class PlantController {
 
         return "plant/water";
     }
+
+    //Process quick water form.
+    @RequestMapping(value="/water", method=RequestMethod.POST)
+    public String processQuickWater(@RequestParam int[] plantIds) {
+
+        for (int plantId : plantIds) {
+            Plant thisPlant = plantDao.findOne(plantId);
+            thisPlant.water();
+            plantDao.save(thisPlant);
+        }
+
+        return "redirect:/plant";
+    }
 }
