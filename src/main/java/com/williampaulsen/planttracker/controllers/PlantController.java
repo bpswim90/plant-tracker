@@ -12,6 +12,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value="plant")
@@ -27,7 +29,17 @@ public class PlantController {
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("plants",plantDao.findAll());
+        Iterable<Plant> plants = plantDao.findAll();
+        ArrayList<String> needWater = new ArrayList<>();
+
+        for (Plant plant : plants) {
+            if (plant.needsWater()) {
+                needWater.add(plant.getName());
+            }
+        }
+
+        model.addAttribute("needWater",needWater);
+        model.addAttribute("plants",plants);
         model.addAttribute("title","My Plants");
 
         return "plant/index";

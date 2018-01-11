@@ -5,6 +5,15 @@
 
 <nav th:replace="fragments :: navbar"></nav>
 <h1 th:text="${title}">All Plants</h1>
+
+<div th:if="${needWater} and ${needWater.size()}" class="alert alert-dismissible alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4 class="alert-heading">Alert!</h4>
+    <p class="mb-0">Please check on or water the following plants:
+        <li th:each="name : ${needWater}" th:text="${name}"></li>
+    </p>
+</div>
+
 <table class="table">
     <thead>
     <th>Plant Name</th>
