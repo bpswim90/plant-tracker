@@ -19,6 +19,9 @@
         <span th:if="${plant.nextWater}" th:text="${plant.nextWater}"></span>
     </p>
     <p><strong>Light preference:</strong> <span th:text="${plant.lightPreference.name}"></span>.</p>
+    <p th:if="${plant.careInstructions}">
+        <strong>Special care instructions:</strong> <span th:text="${plant.careInstructions}"></span>
+    </p>
     <a th:href="@{'/plant/edit/' + ${plant.id}}" class="btn btn-default" role="button">Edit Plant</a>
     <a th:href="@{'/plant/water/' + ${plant.id}}" class="btn btn-info" role="button">Water Plant</a>
 </div>

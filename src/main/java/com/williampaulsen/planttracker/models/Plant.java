@@ -33,6 +33,9 @@ public class Plant {
 
     private String nextWater;
 
+    @Size(max=250, message="Must be less than 250 characters long.")
+    private String careInstructions;
+
     @ManyToOne
     private PlantType plantType;
 
@@ -114,5 +117,13 @@ public class Plant {
 
     public void setNextWater(String nextWater) {
         this.nextWater = nextWater;
+    }
+
+    public String getCareInstructions() {
+        return careInstructions;
+    }
+
+    public void setCareInstructions(String careInstructions) {
+        this.careInstructions = careInstructions;
     }
 }

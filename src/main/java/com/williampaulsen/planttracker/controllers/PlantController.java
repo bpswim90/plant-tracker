@@ -129,6 +129,7 @@ public class PlantController {
         thisPlant.setDaysBetweenWater(formPlant.getDaysBetweenWater());
         thisPlant.setLightPreference(formPlant.getLightPreference());
         thisPlant.setPlantType(formPlant.getPlantType());
+        thisPlant.setCareInstructions(formPlant.getCareInstructions());
         plantDao.save(thisPlant);
 
         return "redirect:";

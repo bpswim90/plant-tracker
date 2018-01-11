@@ -34,6 +34,11 @@
                     th:value="${lightPreference}"></option>
         </select>
     </div>
+    <div class="form-group">
+        <label th:for="careInstructions">Special care instructions</label>
+        <input class="form-control" th:field="*{careInstructions}" />
+        <span th:errors="*{careInstructions}" class="error"></span>
+    </div>
 
     <input type="hidden" th:value="${plantId}" name="plantId" />
 
