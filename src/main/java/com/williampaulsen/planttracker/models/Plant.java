@@ -58,6 +58,22 @@ public class Plant {
         this.plantType = plantType;
     }
 
+    //Checks if the plant needs to be watered right now.
+    public boolean needsWater() {
+        if (this.nextWater == null) {
+            return false;
+        }
+
+        LocalDate today = LocalDate.now();
+        LocalDate nextWaterDate = LocalDate.parse(this.nextWater,formatter);
+
+        if (nextWaterDate.isEqual(today) || nextWaterDate.isBefore(today)) {
+            return true;
+        }
+
+        return false;
+    }
+
     public String getLastWatered() {
         return lastWatered;
     }
