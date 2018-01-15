@@ -1,5 +1,6 @@
 package com.williampaulsen.planttracker.controllers;
 
+import com.williampaulsen.planttracker.models.DateComparator;
 import com.williampaulsen.planttracker.models.LightPreference;
 import com.williampaulsen.planttracker.models.Plant;
 import com.williampaulsen.planttracker.models.PlantType;
@@ -12,6 +13,9 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping(value="plant")
@@ -23,11 +27,20 @@ public class PlantController {
     @Autowired
     private PlantDao plantDao;
 
-    //View displays all saved plants ("My Plants.").
+    //View displays all saved plants ("My Plants"), sorted by next water date.
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("plants",plantDao.findAll());
+        ArrayList<Plant> plants = new ArrayList<>();
+
+        for (Plant plant : plantDao.findAll()) {
+            plants.add(plant);
+        }
+
+        DateComparator comparator = new DateComparator();
+        plants.sort(comparator);
+
+        model.addAttribute("plants",plants);
         model.addAttribute("title","My Plants");
 
         return "plant/index";
