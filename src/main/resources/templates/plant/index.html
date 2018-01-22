@@ -12,7 +12,6 @@
     <th>Last Watered</th>
     <th>Needs Water On</th>
     <th>Light Preference</th>
-    <th>ID</th>
     <th></th>
     </thead>
     <tr th:each="plant : ${plants}">
@@ -26,7 +25,6 @@
         <td th:unless="${plant.nextWater}">N/a</td>
         <td th:if="${plant.nextWater}" th:text="${plant.nextWater}"></td>
         <td th:text="${plant.lightPreference.name}"></td>
-        <td th:text="${plant.id}"></td>
         <td>
             <a th:href="@{'/plant/edit/' + ${plant.id}}" class="btn btn-default btn-xs" role="button">Edit</a>
             <a th:href="@{'/plant/water/' + ${plant.id}}" class="btn btn-info btn-xs" role="button">Water</a>
