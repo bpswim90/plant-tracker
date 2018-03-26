@@ -8,7 +8,7 @@ I love keeping houseplants but tend to forget about them, and either water them 
 
 ## How it works.
 
-Users begin by creating a new Plant Type, where they can specify the type of plant, how often it likes to be watered, as well as its light preference. They can then create an instance of this plant to add to their "My Plants" collection. Once a plant has been added to "My Plants", the user simply clicks the "Water" button next to a plant whenever they water it and the application will keep track of when it was last watered and when it needs to be watered next.
+Users begin by creating a new Plant Type, where they can specify the type of plant, how often it likes to be watered, as well as its light preference. They can then create an instance of this plant to add to their "My Plants" collection. Once a plant has been added to "My Plants", the user simply clicks the "Water" button next to a plant whenever they water it and the application will keep track of when it was last watered and when it needs to be watered next. If a plant is due (or overdue) to be watered, the app will display an alert informing to user to check on the aforementioned plant. 
 
 ## Technologies involved.
 
