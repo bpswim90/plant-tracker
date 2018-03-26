@@ -48,7 +48,7 @@ public class PlantController {
         }
 
         model.addAttribute("needWater", needWater);
-        model.addAttribute("plants",plantDao.findAll());
+        model.addAttribute("plants",plants);
         model.addAttribute("title","My Plants");
 
         return "plant/index";
