@@ -10,14 +10,12 @@
         <th>Plant Type Name</th>
         <th>Days between watering</th>
         <th>Light Preference</th>
-        <th>ID</th>
         <th></th>
     </thead>
     <tr th:each="plantType : ${plantTypes}">
         <td><a th:href="@{'/plant/type/' + ${plantType.id}}" th:text="${plantType.name}"></a></td>
         <td th:text="${plantType.daysBetweenWater}"></td>
         <td th:text="${plantType.lightPreference.name}"></td>
-        <td th:text="${plantType.id}"></td>
         <td><a th:href="@{'/plant/type/edit/' + ${plantType.id}}" class="btn btn-default btn-xs" role="button">Edit</a></td>
     </tr>
 </table>

@@ -142,4 +142,8 @@ public class Plant {
     public void setCareInstructions(String careInstructions) {
         this.careInstructions = careInstructions;
     }
+
+    public LocalDate getNextWaterDate() {
+        return LocalDate.parse(this.nextWater,formatter);
+    }
 }

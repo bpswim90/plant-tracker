@@ -1,5 +1,6 @@
 package com.williampaulsen.planttracker.controllers;
 
+import com.williampaulsen.planttracker.models.DateComparator;
 import com.williampaulsen.planttracker.models.LightPreference;
 import com.williampaulsen.planttracker.models.Plant;
 import com.williampaulsen.planttracker.models.PlantType;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping(value="plant")
@@ -29,17 +29,26 @@ public class PlantController {
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        Iterable<Plant> plants = plantDao.findAll();
+        ArrayList<Plant> plants = new ArrayList<>();
         ArrayList<String> needWater = new ArrayList<>();
 
+        for (Plant plant : plantDao.findAll()) {
+            plants.add(plant);
+        }
+
+        //Sorts plants by which needs water soonest.
+        DateComparator comparator = new DateComparator();
+        plants.sort(comparator);
+
+        //Adds plants that need water to a notification.
         for (Plant plant : plants) {
             if (plant.needsWater()) {
                 needWater.add(plant.getName());
             }
         }
 
-        model.addAttribute("needWater",needWater);
-        model.addAttribute("plants",plants);
+        model.addAttribute("needWater", needWater);
+        model.addAttribute("plants",plantDao.findAll());
         model.addAttribute("title","My Plants");
 
         return "plant/index";
